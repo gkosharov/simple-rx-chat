@@ -1,0 +1,38 @@
+{
+  "name": "etv-fullstack-challenge",
+  "author": "Georgi Kosharov",
+  "version": "1.0.0",
+  "main": "release/index.js",
+  "scripts": {
+    "start": "node index",
+    "build": "webpack --config webpack.config.js --progress --colors",
+    "build-prod": "webpack --config webpack.prod.config.js --colors",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "engine.io": "1.6.11",
+    "engine.io-client": "^2.0.1",
+    "express": "4.14.0",
+    "immutable": "^3.8.1",
+    "moment": "^2.17.1",
+    "react": "15.3.2",
+    "react-dom": "15.3.2",
+    "rx-connect": "^0.6.1",
+    "rxjs": "5.0.0-beta.12"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "6.2.5",
+    "babel-polyfill": "6.13.0",
+    "babel-preset-latest": "6.16.0",
+    "babel-preset-react": "6.11.1",
+    "babel-preset-stage-0": "6.5.0",
+    "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "2.0.0-beta.1",
+    "html-webpack-plugin": "^2.28.0",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "2.1.0-beta.25"
+  }
+}
