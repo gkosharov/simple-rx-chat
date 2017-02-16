@@ -29,7 +29,11 @@ var connections = Rx.Observable.create(function (observer) {
     io.on('connection', function (socket) {
         console.log('Client connection notified to server first. Client socketId is ', socket.id);
 
-        socket.send(JSON.stringify({'socketId': socket.id, 'connectTime': Date.now()}));
+        socket.send(JSON.stringify({
+            sender: socket.id,
+            type: "info",
+            data: {'socketId': socket.id, 'connectTime': Date.now()}
+        }));
 
         observer.next(socket);
     });
@@ -53,7 +57,7 @@ var disconnections = Rx.Observable.create(function (observer) {
 
     io.on('connection', function (socket) {
         socket.on('close', function () {
-            console.log("Data on client disconnect: ", socket.id);
+            console.log("Disconnected socket: ", socket.id);
             observer.next(socket);
         });
     });
@@ -82,17 +86,18 @@ connections.subscribe(function (socket) {
 disconnections.subscribe(function (socket) {
     var socketId = socket.socketId;
     console.log(socketId);
-    var user = usersList.get(socketId);
-    console.log('Client disconnected ', user.socketId, user.nickname);
-    var usersList = usersList.delete(socketId);
-    let usersString = usersList.entries().map((entry)=> {
-        entry.delete("socket")
-    }).toString()
-    console.log("Users after disconnect: ", usersString);
+    var userIndex = usersList.findIndex((u)=>{u.get("id") === socketId});
+    console.log('Client disconnected ', usersList.getIn([userIndex, "id"]));
+    usersList = usersList.deleteIn([userIndex]);
+
+    let toSerialize = usersList.map((user)=> {
+        return user.delete("socket");
+    });
+    console.log("Users after disconnect: ", toSerialize);
     broadcastToOthers({
         sender: socketId,
         type: "disconnect",
-        data: usersString
+        data: toSerialize
     });
 });
 
@@ -124,7 +129,7 @@ function broadcastToOthers(message) {
     usersList.forEach((u)=> {
         if (u.get("id") !== socket) {
             console.log(`Emitting ${message.data} for: ${u.get("id")}`);
-            u.get("socket").send(message.data);
+            u.get("socket").send(JSON.stringify(message));
         }
     })
 }
