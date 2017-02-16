@@ -56,8 +56,7 @@ module.exports = {
         new ExtractTextPlugin("bundle.css"),
         new HtmlWebpackPlugin({
             title: 'Reactive Chat',
-
-            filename: 'static/index.html',
+            filename: 'index.html',
             template: 'index.tpl.ejs',
             bundleCss: 'bundle.css'
         }),

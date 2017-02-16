@@ -9,10 +9,10 @@ import engine from 'engine.io'
 import bodyParser from 'body-parser'
 import Immutable from 'immutable'
 
-console.log("STATICS: ", path.join(__dirname, 'static'))
+//console.log("STATICS: ", path.join(__dirname, 'static'))
 var io = engine.listen(4000)
 var app = express()
-    .use(express.static(path.join(__dirname, 'static')))
+    .use(express.static(path.join(__dirname)))
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({extended: false}))
     .use(function (req, res, next) {
