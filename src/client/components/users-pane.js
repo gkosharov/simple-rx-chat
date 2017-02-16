@@ -6,6 +6,7 @@ import {List, ListItem} from 'material-ui/List'
 
 
 export default class UsersPane extends Component {
+
     buildItems() {
         var user = this.props.user;
         if (this.props.users) {

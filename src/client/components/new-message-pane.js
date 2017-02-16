@@ -53,10 +53,14 @@ export default class NewMessagePane extends Component {
 
     render() {
         return (
-            <Row>
+            <Row style={{
+                position: "fixed",
+                bottom: "0px"
+            }}>
                 <Col md={9}>
                     <input id="message-input" type="text" className="validate" ref="message"/>
-                    <label className="active" htmlFor="message-input">Type your chat, enter/return or hit button to send</label>
+                    <label className="active" htmlFor="message-input">Type your chat, enter/return or hit button to
+                        send</label>
                 </Col>
                 <Col md={3}>
                     <a id="sendBtn" className="btn-floating btn-large waves-effect waves-light red">
