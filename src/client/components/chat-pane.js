@@ -9,7 +9,7 @@ export default class ChatPane extends Component {
     buildItems() {
         if (this.props.messages) {
             return this.props.messages.map((m)=> {
-                return (<ListItem primaryText={m.id} secondaryText={m.status}/>);
+                return (<ListItem primaryText={m.text} secondaryText={m.timestamp}/>);
             });
         }
         return [];

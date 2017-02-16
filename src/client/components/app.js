@@ -75,7 +75,9 @@ export default class App extends Component {
             if(parsed.type === "connect"){
                 self.setState({users: content })
             }else if(parsed.type === "message"){
-                self.setState({messages: content });
+                let messages = this.state.messages.map(i=>i)
+                messages.push(content)
+                self.setState({messages: messages});
 
             }
 
